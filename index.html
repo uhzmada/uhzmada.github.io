@@ -6,33 +6,126 @@
   <title>Qisheng Adam Zhu</title>
   <meta name="description" content="Qisheng Adam Zhu's personal website." />
   <style>
-    :root { --fg:#111; --bg:#fff; --muted:#555; --link:#0a66c2; --card:#f5f5f5; }
-    @media (prefers-color-scheme: dark) {
-      :root { --fg:#eaeaea; --bg:#0b0b0b; --muted:#a0a0a0; --link:#66aaff; --card:#151515; }
+    /* ===============================
+       THEME TOKENS (EDIT HERE)
+       Change font sizes/colors/alpha globally.
+       =============================== */
+    :root {
+      /* Text & surfaces as RGB so we can control alpha cleanly */
+      --fg-rgb: 17,17,17;          /* main text color (dark mode overrides below) */
+      --bg-rgb: 255,255,255;       /* page background */
+      --link-rgb: 10,102,194;      /* link/button accent */
+      --card-rgb: 245,245,245;     /* card background */
+
+      /* Alpha (opacity) controls for text colors */
+      --alpha-strong: 1;           /* strong text (e.g., body, headings) */
+      --alpha-muted: 0.72;         /* muted text (e.g., header paragraph, meta) */
+      --alpha-link: 1;             /* links/buttons */
+
+      /* Font sizes */
+      --fs-body: 1rem;             /* base text (body) */
+      --fs-h1: 2rem;               /* page title */
+      --fs-h2: 1.25rem;            /* section titles */
+      --fs-meta: 0.95rem;          /* subtle meta lines */
+      --fs-footer: 0.9rem;         /* footer text */
+      --fs-btn: 1rem;              /* button text */
     }
+
+    /* Dark mode overrides */
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --fg-rgb: 234,234,234;
+        --bg-rgb: 11,11,11;
+        --link-rgb: 102,170,255;
+        --card-rgb: 21,21,21;
+      }
+    }
+
     * { box-sizing: border-box; }
     body {
-      margin: 0; font: 16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-      color: var(--fg); background: var(--bg);
+      /* BODY TEXT — size: var(--fs-body); color: rgba(var(--fg-rgb), var(--alpha-strong)) */
+      margin: 0;
+      font: var(--fs-body)/1.6 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+      color: rgba(var(--fg-rgb), var(--alpha-strong));
+      background: rgb(var(--bg-rgb));
     }
+
     .wrap { max-width: 760px; margin: 0 auto; padding: 48px 20px; }
-    header h1 { margin: 0 0 6px; font-size: 2rem; }
-    header p { margin: 0 0 24px; color: var(--muted); }
-    .buttons { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 28px; }
+
+    header h1 {
+      /* H1 — size: var(--fs-h1); color: rgba(var(--fg-rgb), var(--alpha-strong)) */
+      margin: 0 0 6px;
+      font-size: var(--fs-h1);
+    }
+
+    header p {
+      /* Header description — size: var(--fs-body); color: rgba(var(--fg-rgb), var(--alpha-muted)) */
+      margin: 0 0 24px;
+      color: rgba(var(--fg-rgb), var(--alpha-muted));
+      text-align: justify;       /* aligns left & right */
+      text-justify: inter-word;  /* optional */
+      hyphens: auto;
+      -webkit-hyphens: auto;
+      -ms-hyphens: auto;
+    }
+
+    .buttons {
+      display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 28px;
+    }
+
     .btn {
-      display: inline-block; padding: 10px 14px; border-radius: 10px;
-      text-decoration: none; border: 1px solid var(--link); color: var(--link);
+      /* Button text — size: var(--fs-btn); color/border from link color */
+      display: inline-block;
+      padding: 10px 14px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-size: var(--fs-btn);
+      border: 1px solid rgba(var(--link-rgb), var(--alpha-link));
+      color: rgba(var(--link-rgb), var(--alpha-link));
     }
-    .btn.primary { background: var(--link); color: #fff; }
-    h2 { margin-top: 28px; font-size: 1.25rem; }
+    .btn.primary {
+      /* Primary button has filled background */
+      background: rgba(var(--link-rgb), var(--alpha-link));
+      color: #fff; /* white text on accent background */
+      border-color: transparent;
+    }
+
+    h2 {
+      /* H2 — size: var(--fs-h2); color: rgba(var(--fg-rgb), var(--alpha-strong)) */
+      margin-top: 28px;
+      font-size: var(--fs-h2);
+    }
+
     .grid { display: grid; gap: 12px; grid-template-columns: 1fr; }
+
     .card {
-      padding: 14px; border-radius: 12px; background: var(--card);
+      /* Card body text inherits body color; background uses card color */
+      padding: 14px;
+      border-radius: 12px;
+      background: rgb(var(--card-rgb));
     }
-    .card a { color: var(--link); text-decoration: none; }
-    .meta { color: var(--muted); font-size: 0.95rem; margin: 0 0 6px; }
+
+    .card a {
+      /* Links inside cards — color: rgba(var(--link-rgb), var(--alpha-link)) */
+      color: rgba(var(--link-rgb), var(--alpha-link));
+      text-decoration: none;
+    }
+
+    .meta {
+      /* Meta lines — size: var(--fs-meta); color: rgba(var(--fg-rgb), var(--alpha-muted)) */
+      color: rgba(var(--fg-rgb), var(--alpha-muted));
+      font-size: var(--fs-meta);
+      margin: 0 0 6px;
+    }
+
     ul.tight { margin: 6px 0 0; padding-left: 18px; }
-    footer { margin-top: 32px; color: var(--muted); font-size: 0.9rem; }
+
+    footer {
+      /* Footer — size: var(--fs-footer); color: rgba(var(--fg-rgb), var(--alpha-muted)) */
+      margin-top: 32px;
+      color: rgba(var(--fg-rgb), var(--alpha-muted));
+      font-size: var(--fs-footer);
+    }
   </style>
 </head>
 <body>
@@ -42,11 +135,13 @@
       <p>BA&amp;MSc Cambridge graduate with backgrounds in mathematics, specialised in cognitive neuroscience. 
         Experiences in computational modelling, neural networks, human behavioural experiments.</p>
       <nav class="buttons" aria-label="Primary">
+        <!-- Buttons sit side-by-side; edit LinkedIn URL below -->
         <a class="btn primary" href="cv.pdf" target="_blank" rel="noopener">Download CV (PDF)</a>
+        <a class="btn" href="https://www.linkedin.com/in/your-handle" target="_blank" rel="noopener">LinkedIn</a>
       </nav>
     </header>
 
-    <!-- New CV section using the same grid/card design -->
+    <!-- CV section styled like Sample Works -->
     <section aria-labelledby="cv">
       <h2 id="cv">CV Highlights</h2>
       <div class="grid">
@@ -118,6 +213,7 @@
   </main>
 
   <script>
+    // Auto-update year in footer
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
 </body>
