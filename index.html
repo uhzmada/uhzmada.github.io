@@ -30,6 +30,8 @@
       padding: 14px; border-radius: 12px; background: var(--card);
     }
     .card a { color: var(--link); text-decoration: none; }
+    .meta { color: var(--muted); font-size: 0.95rem; margin: 0 0 6px; }
+    ul.tight { margin: 6px 0 0; padding-left: 18px; }
     footer { margin-top: 32px; color: var(--muted); font-size: 0.9rem; }
   </style>
 </head>
@@ -37,21 +39,56 @@
   <main class="wrap">
     <header>
       <h1>Qisheng Adam Zhu</h1>
-      <p>BA&MSc Cambridge graduate with backgrounds in mathematics, specialised in cognitive neuroscience. 
+      <p>BA&amp;MSc Cambridge graduate with backgrounds in mathematics, specialised in cognitive neuroscience. 
         Experiences in computational modelling, neural networks, human behavioural experiments.</p>
       <nav class="buttons" aria-label="Primary">
-        <!-- Put your cv.pdf in the repo root or update the link -->
-        <a class="btn primary" href="cv.pdf" target="_blank" rel="noopener">View CV (PDF)</a>
-        <!-- You can also link to an email or LinkedIn/GitHub here -->
-        <a class="btn" href="mailto:you@example.com">Email Me</a>
-        <a class="btn" href="https://github.com/yourusername" target="_blank" rel="noopener">GitHub</a>
+        <a class="btn primary" href="cv.pdf" target="_blank" rel="noopener">Download CV (PDF)</a>
       </nav>
     </header>
+
+    <!-- New CV section using the same grid/card design -->
+    <section aria-labelledby="cv">
+      <h2 id="cv">CV Highlights</h2>
+      <div class="grid">
+        <article class="card">
+          <h3 style="margin:0 0 4px;">Education</h3>
+          <p class="meta">University of Cambridge — BA &amp; MSc (Cognitive Neuroscience)</p>
+          <ul class="tight">
+            <li>Focus: computational modelling, neural networks</li>
+            <li>Thesis: Short title of your dissertation here</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3 style="margin:0 0 4px;">Experience</h3>
+          <p class="meta">Research Assistant, Lab/Dept • YYYY–YYYY</p>
+          <ul class="tight">
+            <li>Designed behavioural experiments; analysed data in Python/R</li>
+            <li>Built NN models to simulate decision-making</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3 style="margin:0 0 4px;">Publications &amp; Talks</h3>
+          <ul class="tight">
+            <li><a href="#" target="_blank" rel="noopener">Paper Title</a> — Journal/Conference, YYYY</li>
+            <li><a href="#" target="_blank" rel="noopener">Talk Title</a> — Venue, YYYY</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3 style="margin:0 0 4px;">Skills</h3>
+          <ul class="tight">
+            <li>Python, R, MATLAB • PyTorch/TensorFlow</li>
+            <li>Experiment design (PsychoPy), statistics, Bayesian modelling</li>
+          </ul>
+        </article>
+      </div>
+    </section>
 
     <section aria-labelledby="works">
       <h2 id="works">Sample Works</h2>
       <div class="grid">
-        <!-- Duplicate or remove cards as needed -->
         <article class="card">
           <h3 style="margin:0 0 4px;">
             <a href="https://your-demo-link-1.example" target="_blank" rel="noopener">Project Title One</a>
@@ -76,12 +113,11 @@
     </section>
 
     <footer>
-      <p>© <span id="year"></span> Your Name</p>
+      <p>© <span id="year"></span> Qisheng Adam Zhu</p>
     </footer>
   </main>
 
   <script>
-    // Auto-update year in footer
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
 </body>
