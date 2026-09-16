@@ -29,6 +29,10 @@
       --fs-meta: 0.95rem;          /* subtle meta lines */
       --fs-footer: 0.9rem;         /* footer text */
       --fs-btn: 1rem;              /* button text */
+
+      /* Profile photo */
+      --avatar-size: 132px;        /* photo size on desktop */
+      --avatar-size-sm: 76px;      /* photo size on phones */
     }
 
     /* Dark mode overrides */
@@ -52,6 +56,31 @@
 
     .wrap { max-width: 760px; margin: 0 auto; padding: 48px 20px; }
 
+    /* ===============================
+       HEADER INTRO (name + description on the left, photo top right)
+       =============================== */
+    .intro {
+      display: grid;
+      grid-template-columns: 1fr auto;  /* text column | photo column */
+      column-gap: 28px;
+      align-items: start;
+      margin-bottom: 24px;
+    }
+    .intro h1 { grid-column: 1; grid-row: 1; }
+    .intro p  { grid-column: 1; grid-row: 2; }
+
+    .avatar {
+      grid-column: 2;
+      grid-row: 1 / span 2;             /* sits beside both name and description */
+      width: var(--avatar-size);
+      height: var(--avatar-size);
+      border-radius: 50%;               /* circle; use e.g. 12px for rounded square */
+      object-fit: cover;                /* crops non-square photos without stretching */
+      object-position: center top;      /* keeps the face in frame for portrait shots */
+      background: rgb(var(--card-rgb)); /* shown while the image loads */
+      border: 3px solid rgb(var(--card-rgb));
+    }
+
     header h1 {
       /* H1 — size: var(--fs-h1); color: rgba(var(--fg-rgb), var(--alpha-strong)) */
       margin: 0 0 6px;
@@ -60,13 +89,25 @@
 
     header p {
       /* Header description — size: var(--fs-body); color: rgba(var(--fg-rgb), var(--alpha-muted)) */
-      margin: 0 0 24px;
+      margin: 0;
       color: rgba(var(--fg-rgb), var(--alpha-strong));
       text-align: justify;       /* aligns left & right */
       text-justify: inter-word;  /* optional */
       hyphens: auto;
       -webkit-hyphens: auto;
       -ms-hyphens: auto;
+    }
+
+    /* Phones: photo stays top right next to the name, description uses full width below */
+    @media (max-width: 560px) {
+      .intro { column-gap: 16px; align-items: center; }
+      .intro p { grid-column: 1 / -1; margin-top: 12px; }
+      .avatar {
+        grid-row: 1;
+        width: var(--avatar-size-sm);
+        height: var(--avatar-size-sm);
+      }
+      header h1 { margin: 0; }
     }
 
     .buttons {
@@ -131,9 +172,17 @@
 <body>
   <main class="wrap">
     <header>
-      <h1>Qisheng Adam Zhu</h1>
-      <p>BA &amp; MSc Cambridge graduate with backgrounds in mathematics, specialised in cognitive neuroscience. 
-        Experiences in computational modelling, neural networks, human behavioural experiments.</p>
+      <div class="intro">
+        <h1>Qisheng Adam Zhu</h1>
+        <p>BA &amp; MSc Cambridge graduate with backgrounds in mathematics, specialised in cognitive neuroscience. 
+          Experiences in computational modelling, neural networks, human behavioural experiments.</p>
+        <!-- PROFILE PHOTO: put your image next to this file and change src if the name differs -->
+        <img class="avatar"
+             src="photo.jpg"
+             alt="Portrait of Qisheng Adam Zhu"
+             width="132" height="132"
+             onerror="this.style.display='none'" />
+      </div>
       <nav class="buttons" aria-label="Primary">
         <!-- Buttons sit side-by-side; edit LinkedIn URL below -->
         <a class="btn primary" href="cv.pdf" target="_blank" rel="noopener">CV</a>
